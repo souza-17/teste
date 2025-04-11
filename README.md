@@ -9,60 +9,162 @@ Este projeto importa e processa boletos a partir de arquivos CSV e PDF. Os bolet
 
 ## Instalação
 1. Clone o repositório:
-   ```bash
+   ```
    git clone <URL_DO_REPOSITORIO>
    cd green-test
 Instale as dependências:
 
-bash
-Copiar
-npm install
+     npm install
+ 
 Crie um arquivo .env na raiz do projeto com as variáveis de ambiente, por exemplo:
 
-env
-Copiar
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=greenuser
-DB_PASSWORD=greenpass
-DB_NAME=greenpark
-PORT=3000
+      DB_HOST=localhost
+      DB_PORT=3306
+      DB_USER=greenuser
+      DB_PASSWORD=greenpass
+      DB_NAME=greenpark
+      PORT=3000
+      
 Configure seu banco de dados executando os scripts SQL necessários e insira os registros na tabela lotes. Exemplo:
 
-sql
-Copiar
-INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0017', true, NOW());
-INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0018', true, NOW());
-INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0019', true, NOW());
+      sql
+      INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0017', true, NOW());
+      INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0018', true, NOW());
+      INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0019', true, NOW());
+
+
 Inicie o servidor:
 
-bash
-Copiar
-npm run dev
+      npx ts-node-dev src/server.ts
+
+
 Uso
+
+Existe um arquivo Colletion.json para importar no POSTMAN as requisições e Exemplos:
+
+         {
+          "info": {
+            "_postman_id": "12345678-90ab-cdef-1234-567890abcdef",
+            "name": "Green Test API",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "item": [
+            {
+              "name": "Import CSV Boletos",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": ""
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3000/boletos/csv",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["boletos", "csv"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Import PDF Boletos",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": ""
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3000/boletos/pdf",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["boletos", "pdf"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Listar Boletos",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/boletos?nome=JOSE&valor_inicial=100&valor_final=200&id_lote=3",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["boletos"],
+                  "query": [
+                    { "key": "nome", "value": "JOSE" },
+                    { "key": "valor_inicial", "value": "100" },
+                    { "key": "valor_final", "value": "200" },
+                    { "key": "id_lote", "value": "3" }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Gerar Relatório PDF (Base64)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/boletos?relatorio=1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["boletos"],
+                  "query": [
+                    { "key": "relatorio", "value": "1" }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+      }
+
+
 Importação CSV:
 
 Endpoint: POST /boletos/csv
 
 Envie um arquivo CSV com o seguinte exemplo de conteúdo:
 
-arduino
-Copiar
-"nome;unidade;valor;linha_digitavel"
-"JOSE DA SILVA;17;182.54;123456123456123456"
-"MARCOS ROBERTO;18;178.20;123456123456123456"
-"MARCIA CARVALHO;19;128.00;123456123456123456"
+
+      Copiar
+      "nome;unidade;valor;linha_digitavel"
+      "JOSE DA SILVA;17;182.54;123456123456123456"
+      "MARCOS ROBERTO;18;178.20;123456123456123456"
+      "MARCIA CARVALHO;19;128.00;123456123456123456"
+
 Importação PDF:
 
 Endpoint: POST /boletos/pdf
 
 Envie um arquivo PDF que contenha várias páginas com textos no formato:
 
-objectivec
-Copiar
 PAGINA BOLETO MARCIA CARVALHO
 PAGINA BOLETO JOSE DA SILVA
 PAGINA BOLETO MARCOS ROBERTO
+
 Listagem/Relatório:
 
 Endpoint: GET /boletos
