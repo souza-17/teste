@@ -1,0 +1,99 @@
+{
+    "info": {
+      "_postman_id": "12345678-90ab-cdef-1234-567890abcdef",
+      "name": "Green Test API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Import CSV Boletos",
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "file",
+                "type": "file",
+                "src": ""
+              }
+            ]
+          },
+          "url": {
+            "raw": "http://localhost:3000/boletos/csv",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["boletos", "csv"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Import PDF Boletos",
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "file",
+                "type": "file",
+                "src": ""
+              }
+            ]
+          },
+          "url": {
+            "raw": "http://localhost:3000/boletos/pdf",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["boletos", "pdf"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Listar Boletos",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:3000/boletos?nome=JOSE&valor_inicial=100&valor_final=200&id_lote=3",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["boletos"],
+            "query": [
+              { "key": "nome", "value": "JOSE" },
+              { "key": "valor_inicial", "value": "100" },
+              { "key": "valor_final", "value": "200" },
+              { "key": "id_lote", "value": "3" }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Gerar Relatório PDF (Base64)",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:3000/boletos?relatorio=1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["boletos"],
+            "query": [
+              { "key": "relatorio", "value": "1" }
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  
