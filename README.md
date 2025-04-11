@@ -148,8 +148,6 @@ Endpoint: POST /boletos/csv
 
 Envie um arquivo CSV com o seguinte exemplo de conteúdo:
 
-
-      Copiar
       "nome;unidade;valor;linha_digitavel"
       "JOSE DA SILVA;17;182.54;123456123456123456"
       "MARCOS ROBERTO;18;178.20;123456123456123456"
@@ -161,9 +159,9 @@ Endpoint: POST /boletos/pdf
 
 Envie um arquivo PDF que contenha várias páginas com textos no formato:
 
-PAGINA BOLETO MARCIA CARVALHO
-PAGINA BOLETO JOSE DA SILVA
-PAGINA BOLETO MARCOS ROBERTO
+      PAGINA 1 BOLETO MARCIA CARVALHO
+      PAGINA 2 BOLETO JOSE DA SILVA
+      PAGINA 3 BOLETO MARCOS ROBERTO
 
 Listagem/Relatório:
 
