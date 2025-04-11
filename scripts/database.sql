@@ -15,3 +15,8 @@ CREATE TABLE IF NOT EXISTS boletos (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_lote) REFERENCES lotes(id)
 );
+
+
+INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0017', true, NOW());
+INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0018', true, NOW());
+INSERT INTO lotes (nome, ativo, criado_em) VALUES ('0019', true, NOW());
